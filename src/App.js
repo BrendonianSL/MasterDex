@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { fetchPokemonData } from './API/pokemonDataSlice';
 //Pages Import
-import Home from './Home';
+import Home from './Pages/Home';
 import PokemonInfo from './PokemonInfo';
 
 function App() {
@@ -26,12 +26,10 @@ function App() {
 
   return (
       <Router>
-        <div>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/:pokemonName" element={<PokemonInfo />}/>
           </Routes>
-        </div>
       </Router>
   );
 }

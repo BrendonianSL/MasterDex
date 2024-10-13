@@ -1,9 +1,19 @@
 import { Provider } from 'react-redux';
+import configureMockStore from 'redux-mock-store';
 import { configureStore } from '@reduxjs/toolkit';
 import { searchSlice } from './searchSlice';
 import { render, fireEvent, screen } from '@testing-library/react'; 
 import { MemoryRouter } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { executeSearch } from './searchSlice';
+import thunk from 'redux-thunk';  // Import redux-thunk
+
+//Mocks Execute Search Function
+jest.mock('./searchSlice', () => ({
+    ...jest.requireActual('./searchSlice'), // Preserve other exports like `searchSlice.reducer`
+    executeSearch: jest.fn(), // Mock only the executeSearch function
+  }));
+  
 
 describe('Successfully Searches For A Pokemon', () => {
     it('Correctly Updates The State In Store', () => {

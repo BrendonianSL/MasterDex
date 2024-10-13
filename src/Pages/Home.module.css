@@ -1,0 +1,82 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    color: #FFF; /* Sets Default Color To White For All Text & Elements */
+    /* Import Font Family */
+}
+
+body {
+    height: 100%;
+}
+
+html {
+    background-color: #141414;
+    width: 100%; /* Set To Fill Height Of Viewport. */
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0rem 16.563rem; /* 0px T/B 265px L/R Spacing. */
+    height: 100%;
+}
+
+/* Text Styling */
+h3, h4 {
+    text-align: center;
+}
+
+h3 {
+    font-size: 2.5rem;
+}
+
+form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1rem; /* 16px Spacing */
+    width: 100%; /* Set To Fill Width Of Parent. */
+}
+
+form input {
+    border-radius: 4rem;
+    border: none;
+    padding: .75rem 1rem; /* 6px T/B 12px L/R Spacing. */
+    width: 100%;
+    color: black;
+}
+
+#buttonContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    width: 100%; /* Set To Fill Width Of Parent. */
+}
+
+.button {
+    color: #FFF;
+    background-color: #EF5350;
+    border-radius: 4rem;
+    padding: 1rem 1.75rem; /* 16px T/B */
+    border: none;
+    transition: all 0.3s ease; /* Added For Site Polish */
+}
+
+.button:hover {
+    cursor: pointer; /* Indicates Interaction */
+    background-color: #FFF;
+    color: #EF5350;
+    transition: all 0.3s ease; /* Added For Site Polish */
+}
+
+#contentContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem; /* 32px Spacing */
+    width: 100%; /* Set To Fill Width Of Parent. */
+    max-width: 934px; /* Sets Maximum Width To Avoid Input Field Stretching On Bigger Screens */
+}
