@@ -1,9 +1,14 @@
 //This Component Is Used For The Header Of the Webapp.
 import styles from './Navigation.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleDarkMode } from '../Features/darkmode/darkModeSlice';
 
 export function Navigation() {
+    const dispatch = useDispatch();
+
+    const isDarkMode = useSelector(state => state.darkMode.darkMode);
     return (
-        <header>
+        <header style={{backgroundColor: isDarkMode ? '#141414' : '#EBEBEB', color: isDarkMode ? '#FFF' : '#000'}}>
             <nav>
                 <svg width="20" height="20" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_1_34)">
@@ -17,6 +22,7 @@ export function Navigation() {
                     </defs>
                 </svg>
                 <h2>MasterDex</h2>
+                <button onClick={() => dispatch(toggleDarkMode())}>Dark Mode</button>
             </nav>
         </header>
     )

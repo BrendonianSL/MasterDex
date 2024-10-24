@@ -17,6 +17,7 @@ export function Pokedex() {
 
     //Subscribes The The Pokemon Data State So We Can Access Values From It.
     const pokemonData = useSelector(state => state.pokemonData.data.pokemon);
+    const isDarkMode = useSelector(state => state.darkMode.darkMode);
     
     function queryChange({ target }) {
         //Sets The Current State Of The Query
@@ -59,7 +60,7 @@ export function Pokedex() {
     }, [pokemonData]);
 
     return (
-        <main>
+        <main style={{backgroundColor: isDarkMode ? '#141414' : '#EBEBEB', color: isDarkMode ? 'white' : 'black'}}>
             <h2>POKEDEX</h2>
             <div id={styles.container}>
                 <input id={styles.searchBar} type='text' placeholder='Search Pokemon...'></input>

@@ -1,7 +1,9 @@
-import styles from './PokemonCard.module.css'
+import styles from './PokemonCard.module.css';
+import { useSelector } from 'react-redux';
 
 export function PokemonCard({ cardKey, name, sprite, types }) {
 
+    const isDarkMode = useSelector(state => state.darkMode.darkMode);
     //Helper Function Created To Help Properly Display Typings.
     //SHOULD ACCEPT AN ARRAY.
     function handleTyping(types) {
@@ -226,7 +228,7 @@ export function PokemonCard({ cardKey, name, sprite, types }) {
     }
 
     return (
-    <div className={styles.gridItem}>
+    <div style={{backgroundColor: isDarkMode ? '#333' : '#FFF'}} className={styles.gridItem}>
         <div className={styles.gridItemInfo}>
             <img class={styles.cardSprite} src={sprite} alt={name + 's Sprite'} />
             <div className={styles.pokemonName}>

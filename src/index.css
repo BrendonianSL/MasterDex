@@ -29,11 +29,3 @@ code {
   flex-direction: column;
 }
 
-.pokemonType {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: .5rem 1rem;
-  border-radius: 4rem;
-  font-style: italic;
-}
