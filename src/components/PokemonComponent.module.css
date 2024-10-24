@@ -1,0 +1,81 @@
+section {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 0rem 16.563rem;
+}
+
+h3 {
+    font-size: .5rem;
+    font-style: italic;
+    font-weight: 900;
+}
+
+.pageHeading {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.pokemonType {
+    background-color: skyblue;
+    border-radius: 4rem;
+    padding: .5rem 2rem;
+    font-style: italic;
+    font-weight: 700;
+}
+
+.stat {
+    background-color: #141414;
+    color: white;
+    border-radius: 1rem;
+    padding: 1rem 1.5rem;
+    width: 100%; /* Equally Distributes Weight Across Whole Container */
+    box-shadow: 0rem .25rem .25rem 0rem #000;
+    text-align: center;
+}
+
+#grid {
+    display: grid;
+    grid-template-areas:
+    "sprite summary"
+    "stats stats"
+    "moves moves";
+    gap: 1rem;
+}
+
+/* Shared Styling Between All Sub-Sections. */
+#stats, #summary, #sprite, #moves {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border-radius: 1rem;
+    padding: 1rem;
+}
+
+#sprite img {
+    width: 200px;
+    height: auto;
+}
+
+#stats {
+    grid-area: stats;
+    gap: 1rem;
+}
+
+#statsContainer {
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+    width: 100%;
+}
+
+#moves {
+    grid-area: moves;
+    width: 100%;
+}
+
+#typeContainer {
+    display: flex;
+    gap: 1rem;
+}

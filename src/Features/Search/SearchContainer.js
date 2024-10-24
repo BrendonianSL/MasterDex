@@ -9,7 +9,7 @@ export default function SearchContainer() {
         const formData = new FormData(target);
 
         //Grabs Search Term From The Form
-        const searchTerm = formData.get('searchbar');
+        const searchTerm = formData.get('searchbar').toLowerCase();
 
         //Navigate To New Page Using The SearchTerm
         navigate(`/${searchTerm}`);

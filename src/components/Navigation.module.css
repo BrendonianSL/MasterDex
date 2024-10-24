@@ -1,0 +1,17 @@
+header {
+    padding: 2rem 16.563rem; /* 0px T/B 265px L/R Spacing. */
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem; /* 16px Spacing. */
+    width: 100% /* Takes Up Full Container Width */
+}
+
+@media only screen and (min-width: 320px) and (max-width: 640px) {
+    header {
+        padding: 2rem;
+    }
+}
