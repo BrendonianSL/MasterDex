@@ -1,4 +1,8 @@
-.gridItem {
+.link {
+    text-decoration: none;
+}
+
+.card {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -8,27 +12,31 @@
     transition: all .2s linear;
 }
 
-.gridItem:hover {
+.card:hover {
     transition: all .2s linear;
     transform: scale(1.05);
     cursor: pointer; /* Changes The Cursor For Usability */
 }
 
-.gridItemInfo {
+.cardInfo {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
     height: 100%;
-    padding: 0rem .5rem;
+    padding: .5rem .5rem;
     gap: 1rem;
 }
 
-.pokemonName {
+.cardDetails {
     display: flex;
     justify-content: space-between;
     width: 100%; /* Takes Up Full Container Width. */
     height: auto; /* Hugs Content */
+}
+
+.cardName {
+    font-weight: 600;
 }
 
 .cardAccent {
@@ -37,24 +45,24 @@
     border-radius: 0rem 0rem 1rem 1rem;
 }
 
+.cardSprite {
+    width: 8rem;
+    height: 8rem;
+}
+
+.cardID {
+    color: #656565;
+    font-weight: 700;
+    font-style: italic;
+}
+
 .typing {
     width: 100%;
     display: flex;
     gap: .25rem;
 }
 
-.cardSprite {
-    width: 8rem;
-    height: 8rem;
-}
-
 .typeIcon {
     width: 1.5rem;
     height: 1.5rem;
-}
-
-.pokemonID {
-    color: #656565;
-    font-weight: 700;
-    font-style: italic;
 }

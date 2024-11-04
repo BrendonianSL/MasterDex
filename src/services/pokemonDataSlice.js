@@ -10,7 +10,7 @@ export const fetchPokemonData = createAsyncThunk(
             const fetchPromises = [
                 FetchData('https://pokeapi.co/api/v2/pokemon?limit=20'),
                 FetchData('https://pokeapi.co/api/v2/berry'),
-                FetchData('https://pokeapi.co/api/v2/machine'),
+                FetchData('https://pokeapi.co/api/v2/item'),
                 FetchData('https://pokeapi.co/api/v2/move'),
             ];
 
@@ -26,6 +26,22 @@ export const fetchPokemonData = createAsyncThunk(
     }
 );
 
+export const updatePokemon = createAsyncThunk(
+    'pokemonData/updatePokemon',
+    async (pageLink) => {
+        try {
+            //Attempts To Grab The Page Of Pokemon Requested.
+            const response = await FetchData(pageLink);
+
+            //Returns The Response.
+            return response;
+        } catch (error) {
+            //Throws An Error.
+            throw new Error(error);
+        }
+    }
+)
+
 //Creates A Slice For The Pokemon Data Feature.
 export const pokemonData = createSlice({
     name: 'pokemonData', //Name Of The Feature.
@@ -33,7 +49,7 @@ export const pokemonData = createSlice({
         data: {
             pokemon: null, //Holds Pokemon Data Object.
             berries: null, //Holds Berries Data.
-            machines: null, //Holds All Machines.
+            items: null, //Holds All Items..
             moves: null, //Holds All Moves.
         },
         status: null,
@@ -51,7 +67,7 @@ export const pokemonData = createSlice({
                 ...state.data, //Spread Operator.
                 pokemon: action.payload[0],
                 berries: action.payload[1],
-                machines: action.payload[2],
+                items: action.payload[2],
                 moves: action.payload[3],
             }; //Sets The Data To The Payload.
             state.error = null; //No Error When We Fulfill The Request.
@@ -59,6 +75,23 @@ export const pokemonData = createSlice({
         .addCase(fetchPokemonData.rejected, (state, action) => { //Handles Rejected Case.
             state.status = 'rejected'; //Sets Status To Rejected.
             state.error = action.error.message; //Sets The Error To The Messaage Given.
+        })
+        .addCase(updatePokemon.pending, (state, action) => {
+            state.status = 'pending';
+            state.error = null;
+        })
+        .addCase(updatePokemon.fulfilled, (state, action) => {
+            state.status = 'fulfilled';
+            state.data = {
+                //Spread Operator To Keep Rest Of The State The Same
+                ...state.data,
+                pokemon: action.payload,
+            }
+            state.error = null;
+        })
+        .addCase(updatePokemon.rejected, (state, action) => {
+            state.status = 'rejected';
+            state.error = action.error.message;
         })
     }
 });

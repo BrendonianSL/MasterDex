@@ -2,10 +2,11 @@ import { configureStore } from '@reduxjs/toolkit';
 import { pokemonData } from '../services/pokemonDataSlice';
 import { searchSlice } from '../Features/search/searchSlice';
 import { darkModeSlice } from '../Features/darkmode/darkModeSlice';
+import { applicationData } from '../services/applicationDataSlice';
 
 const store = configureStore({
     reducer: {
-        pokemonData: pokemonData.reducer, //Configures Reducer For Pokemon Data In Store.
+        applicationData: applicationData.reducer,
         search: searchSlice.reducer,
         darkMode: darkModeSlice.reducer,
     }

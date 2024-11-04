@@ -1,0 +1,14 @@
+.ctaButton {
+    background-color: #F05A57;
+    color: white;
+    border: none;
+    padding: .5rem 1rem;
+    border-radius: .5rem;
+    cursor: pointer;
+}
+
+@media only screen and (min-width: 1024px) {
+    .ctaButton {
+        font-size: 1rem;
+    }
+}

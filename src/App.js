@@ -3,42 +3,45 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { fetchPokemonData } from './services/pokemonDataSlice';
-import { Navigation } from './components/Navigation';
 import { InfoPageContainer } from './Pages/InfoPageContainer';
 import { Pokedex } from './Pages/Pokedex';
+import { Footer } from './components/Footer';
+import { Header } from './components/Header';
+import { PokeCompare } from './Pages/PokeCompare';
+import { fetchApplicationData } from './services/applicationDataSlice';
 
 function App() {
   // Creates Dispatch Variable For Ease Of Use
   const dispatch = useDispatch();
 
-  // Grabs The Current State Of The Pokemon Array and Loading Status
-  const pokemonData = useSelector(state => state.pokemonData.data);
-  const pokemonDataStatus = useSelector(state => state.pokemonData.status);
+  const loadingAppData = useSelector(state => state.applicationData.isLoading);
+  const appDataError = useSelector(state => state.applicationData.error);
 
+
+  //Hook Triggered On Application Mount. Fetches Pokemon Data.
   useEffect(() => {
-    // On Mount, Fetches Pokemon Data
-    dispatch(fetchPokemonData());
+    // On Mount, Fetches Pokemon Data.
+    dispatch(fetchApplicationData());
   }, [dispatch]);
 
   // Conditional rendering based on data fetching status
-  if (pokemonDataStatus === 'loading') {
+  if (loadingAppData && !appDataError) {
     return <div>Loading...</div>; // You can replace this with a loading spinner
   }
 
-  if (pokemonDataStatus === 'failed') {
+  if (!loadingAppData && appDataError) {
     return <div>Error loading data. Please try again.</div>;
   }
 
   // When data is loaded, render the app
   return (
     <Router>
-      {/* Header */}
-      <Navigation />
-      {/* Routes */}
+      <Header />
       <Routes>
         <Route path="/" element={<Pokedex />} />
-        <Route path="/:searchQuery" element={<InfoPageContainer />} />
+        <Route path="/pokemon/:searchQuery" element={<InfoPageContainer />} />
       </Routes>
+      <Footer />
     </Router>
   );
 }

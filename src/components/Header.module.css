@@ -1,0 +1,71 @@
+header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 2rem;
+    width: 100%;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 80rem; /* 1280 px */
+}
+
+#headerLogo {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+#headerLinks {
+    display: flex;
+    gap: 2rem;
+}
+
+.headerLink {
+    border: none;
+    background-color: transparent; /* No Background Color */
+    padding: 1rem;
+    border-radius: 1rem;
+    font-weight: 500;
+    font-size: 1.25rem;
+}
+
+.headerLink a {
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    color: #141414;
+}
+
+/* Desktop Styling */
+@media only screen and (min-width: 1025px) {
+    header {
+        padding: 1rem;
+    }
+
+    .headerLink:hover {
+        cursor: pointer;
+        background-color: #F05A57;
+    }
+    
+    /* This Styling Specifically Is To Deal With The Link Tag Which Is Rendered As An Anchor. */
+    .headerLink:hover a {
+        color: white;
+    }
+
+    #mobileMenuButton {
+        display: none;
+    }
+}
+
+/* Mobile & Tablet Styling */
+@media only screen and (min-width: 320px) and (max-width: 1024px ) {
+    /* Disables Header Links */
+    #headerLinks {
+        display: none;
+    }
+}

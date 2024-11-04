@@ -1,0 +1,17 @@
+#skeletonCard {
+    height: 236px;
+    width: 100%;
+    background: linear-gradient(
+        90deg,
+        #e0e0e0 20%,
+        #f2f2f2 40%,
+        #e0e0e0 60%
+    );
+    border-radius: .5rem;
+}
+
+/* Shimmer effect */
+@keyframes shimmer {
+    0% { background-position: 0px 0; }
+    100% { background-position: 100px 0; }
+}
