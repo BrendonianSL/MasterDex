@@ -28,6 +28,22 @@ export const applicationData = createSlice({
         error: false, /* No Error By Default */
         errorNumber: null, /* No Error Number By Default */
     },
+    reducers: {
+        updatePokemonData: (state, action) => {
+            //The Action Received Is An Object With Key Value Pairs.
+            //For Each Key In The Object, Update That Portion Of The State.
+            Object.keys(action.payload).forEach(key => {
+                state.pokemonData[key] = {
+                    ...state.pokemonData[key], //Maintains The Data Included Prior.
+                    ...action.payload[key] //Updates The State With New Data.
+                };
+            });
+
+            console.log('Updated Pokemon Data');
+
+            console.log(state.pokemonData['bulbasaur']);
+        }
+    },
     extraReducers: (builder) => {
         builder
         .addCase(fetchApplicationData.pending, (state, action) => {
