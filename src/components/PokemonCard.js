@@ -2,15 +2,14 @@ import styles from './Card.module.css';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-export function PokemonCard({ cardKey, name, sprite, types }) {
-
+export function PokemonCard({ cardKey, name, id, types, sprite }) {
     const isDarkMode = useSelector(state => state.darkMode.darkMode);
     //Helper Function Created To Help Properly Display Typings.
     //SHOULD ACCEPT AN ARRAY.
     function handleTyping(types) {
         //console.log('Inside Handle Typing');
         return types.map(type => {
-            switch (type) {
+            switch (type.type.name) {
                 case 'grass':
                     return (
                         <svg className={styles.typeIcon} data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" key={type} /* Add a unique key for each SVG element */ >
@@ -170,6 +169,8 @@ export function PokemonCard({ cardKey, name, sprite, types }) {
                         <path fill="#FFF" d="M139.92,124.38c-.27,5.3-.79,12.61-6.05,18.45-4.12,4.57-7.96,4.83-11.66-.03-7.43-9.75-7.46-20.89-4.48-32.19,1.96-7.42,2.86-7.9,10.26-7.9,7.41,0,7.97,.58,10.38,7.85,1.28,3.88,1.58,7.78,1.56,13.83Z"/>
                         </svg>
                     )
+                default:
+                    return null;
                 }
         });
     }
@@ -219,13 +220,13 @@ export function PokemonCard({ cardKey, name, sprite, types }) {
     }
 
     return (
-    <Link className={styles.link} to={`/pokemon/${name}`}>
+    <Link key={cardKey} className={styles.link} to={`/pokemon/${name}`}>
         <div style={{backgroundColor: isDarkMode ? '#333' : '#FFF'}} className={styles.card}>
             <div className={styles.cardInfo}>
                 <img className={styles.cardSprite} src={sprite} alt={name + 's Sprite'} />
                 <div className={styles.cardDetails}>
                     <span style={{color: isDarkMode ? '#FFF' : '#141414'}} className={styles.cardName}>{`${name.toUpperCase()}`}</span>
-                    <span className={styles.cardID}>{`#${cardKey}`}</span>
+                    <span className={styles.cardID}>{`#${id}`}</span>
                 </div>
                 <div className={styles.typing}>
                     {handleTyping(types)}

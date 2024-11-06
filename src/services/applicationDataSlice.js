@@ -24,7 +24,7 @@ export const applicationData = createSlice({
     initialState: {
         pokemonData: {}, //Hashmap Of All Data.
         paginatedPokemon: null, //Paginated List Of All Data.
-        isLoading: false, /* Not Loading By Default */
+        isLoading: null, /* Not Loading By Default */
         error: false, /* No Error By Default */
         errorNumber: null, /* No Error Number By Default */
     },
@@ -38,10 +38,6 @@ export const applicationData = createSlice({
                     ...action.payload[key] //Updates The State With New Data.
                 };
             });
-
-            console.log('Updated Pokemon Data');
-
-            console.log(state.pokemonData['bulbasaur']);
         }
     },
     extraReducers: (builder) => {
