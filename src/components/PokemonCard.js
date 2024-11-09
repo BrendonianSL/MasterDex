@@ -176,8 +176,8 @@ export function PokemonCard({ cardKey, name, id, types, sprite }) {
     }
 
     //Helper Function. User To Determine The Card's Accent Color.
-    function accentColor(types) {
-        switch(types[0]) {
+    function accentColor() {
+        switch(types[0].type.name) {
             case 'grass':
                 return '#439837';
             case 'fire':
@@ -232,7 +232,7 @@ export function PokemonCard({ cardKey, name, id, types, sprite }) {
                     {handleTyping(types)}
                 </div>
             </div>
-            <div style={{backgroundColor: accentColor(types)}} className={styles.cardAccent}></div>
+            <div style={{backgroundColor: accentColor()}} className={styles.cardAccent}></div>
         </div>
     </Link>
     )

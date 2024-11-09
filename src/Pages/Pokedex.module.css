@@ -3,4 +3,12 @@
     max-width: 80rem; /* 1280px */
     width: 100%;
     flex-grow: 1; /* Takes Up Remaining Space In Container. */
+    flex-direction: column;
+}
+
+#grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    width: 100%;
 }

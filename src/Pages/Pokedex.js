@@ -12,35 +12,73 @@ export function Pokedex() {
     const [pageNumber, setPageNumber] = useState(1);
     const [fetchLoad, setFetchLoad] = useState(false);
 
+    //Use State Responsible For Setting Filters.
+    const [filters, setFilters] = useState({
+        type: '',
+    });
+
     const pokemonData = useSelector(state => state.applicationData.pokemonData);
     const isLoading = useSelector(state => state.applicationData.isLoading);
     const error = useSelector(state => state.applicationData.error);
 
-    // Trigger Pagination Once We Are Done Loading The Pokemon Data.
+    //Trigger Pagination Once We Are Done Loading The Pokemon Data OR When Filters Change.
     useEffect(() => {
         if (!isLoading && !error) {
-            paginateData(); // When loading is done, trigger pagination
+            //Triggers Pagination.
+            paginateData();
         }
-    }, [isLoading, error]);
+    }, [isLoading, error, filters]); //Pagination Only Gets Triggered When Loading, Error, Or Filters Change.
 
-    // Fetch details for the current page when page number changes.
+    //Fetch Details About Pokemon From The Current Page.
     useEffect(() => {
         if (paginatedData[pageNumber]) {
-            fetchPokemonDetails(); // Fetch details only after data is paginated
+            //Triggers The Details Search.
+            fetchPokemonDetails();
         }
-    }, [pageNumber, paginatedData]);
+    }, [pageNumber, paginatedData]); //Fetch Details Only Gets Triggered When We Change The Page Number Or Paginated Data Changes.
 
-    // Helper function to paginate data
-    function paginateData() {
+    //Changes The Page Number Upon Filters Changing.
+    useEffect(() => {
+        //Directly Resets The Page Number Back To 1.
+        setPageNumber(1);
+    }, [filters]); //Reset Page Number Only Gets Triggered When Filters Change.
+
+    //Helper Function To Paginate The Data. It's Asynchrnous To Await The Results For The Filters If Needed.
+    async function paginateData() {
+
+        //Creates An Empty Object To Store Data.
         const data = {};
-        const totalPages = Math.ceil(Object.keys(pokemonData).length / 20);
 
-        for (let page = 1; page <= totalPages; page++) {
-            const start = (page - 1) * 20;
-            const end = page * 20;
-            data[page] = Object.keys(pokemonData).slice(start, end);
+        //Check To See If There Is Filters Applied.
+        if(filters.type || filters.generation) {
+            //If There Are Filters, Filter The Data First.
+            const filteredData = await filterSearch();
+
+            //Calculates Total Pages By Dividing The Length Of The Filtered Data By 20.
+            const totalPages = Math.ceil(filteredData.length / 20);
+
+            //Begins Assigning Data To Every Page
+            for(let page = 1; page <= totalPages; page++) {
+                //Calculates The Start And End Index For The Page.
+                const start = (page - 1) * 20;
+                const end = (page * 20);
+
+                //Assigns The Data To The Current Page.
+                data[page] = filteredData.slice(start, end);
+            }
+            } else {
+                //Calculates The Total Number Of Pages.
+                const totalPages = Math.ceil(Object.keys(pokemonData).length / 20);
+
+                for (let page = 1; page <= totalPages; page++) {
+                    const start = (page - 1) * 20;
+                    const end = page * 20;
+                    data[page] = Object.keys(pokemonData).slice(start, end);
+            }
         }
-        setPaginatedData(data); // Update paginated data for each page
+
+        //Updates Paginated Data.
+        setPaginatedData(data); 
     }
 
     // Helper function to fetch details for each pokemon on the current page
@@ -88,6 +126,63 @@ export function Pokedex() {
         setPageNumber(prevPage => Math.max(prevPage - 1, 1));
     }
 
+    //Helper Function Responsible For Filtering.
+    async function filterSearch() {
+        try {
+            //Creates An Empty Array To Host The Names Of Filtered Pokemon.
+            let filteredData = [];
+        
+            //Checks If There Is A Typing Filter.
+            if (filters.type) {
+                //Fetch Data.
+                const typeData = await FetchData(`https://pokeapi.co/api/v2/type/${filters.type}`);
+                
+                //Populate Filtered Data With The Names. 
+                filteredData = typeData.pokemon.map(element => element.pokemon.name);
+            }
+        
+            //Checks If There Is A Generation Filter.
+            if (filters.generation) {
+                //Fetch Data.
+                const generationData = await FetchData(`https://pokeapi.co/api/v2/generation/${filters.generation}`);
+
+                //Set That Data To An Array Format.
+                const generationArray = generationData.pokemon_species.map(element => element.name);
+
+                //Checks If We Have Filtered Data Present.
+                if (filteredData.length > 0) {
+                    //If We Do, Filter It.
+                    filteredData = filteredData.filter(pokemon => generationArray.includes(pokemon));
+                } else {
+                    //If We Don't, Add It To The Array.
+                    filteredData = generationArray;
+                }
+            }
+        
+            //Return The Filtered Data.
+            return filteredData;
+
+        } catch (error) {
+            console.log("Error Filtering Pokemon Data");
+        }
+    }
+
+    //Helper Function To Apply Type Filter To Pokemon Data.
+    function applyTypeFilter({ target }) {
+        setFilters(prevFilters => ({
+            ...prevFilters,
+            type: target.value,
+        }));
+    }
+
+    //Helper Function To Apply Generation Filter To The Pokemon.
+    function applyGenerationFilter({ target }) {
+        setFilters(prevFilters => ({
+            ...prevFilters,
+            generation: target.value,
+        }));
+    }
+    
     // Conditional rendering based on loading and error state
     if (isLoading) {
         return <div><p>Loading...</p></div>;
@@ -102,7 +197,7 @@ export function Pokedex() {
             <h2>Pokedex</h2>
             <button onClick={previousPage} disabled={pageNumber === 1}>Previous</button>
             <button onClick={nextPage} disabled={pageNumber === Object.keys(paginatedData).length}>Next</button>
-            <ul>
+            <section id={styles.grid}>
                 {fetchLoad ? (
                     <p>Loading...</p>
                 ) : (
@@ -120,7 +215,7 @@ export function Pokedex() {
                         )
                     ))
                 )}
-            </ul>
+            </section>
         </main>
     );
 }
