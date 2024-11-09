@@ -4,7 +4,7 @@ MasterDex is a website created as a final project for the Front End Web Developm
 
 ## Features
 
-PokeAPI Data:
+### PokeAPI Data
 
 MasterDex uses PokeAPI to fetch data about all pokemon and display it back to the user. This allows the site to perform functions based on that data to display information to the user.
 
