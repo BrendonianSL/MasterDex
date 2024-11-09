@@ -8,9 +8,9 @@ PokeAPI Data:
 
 MasterDex uses PokeAPI to fetch data about all pokemon and display it back to the user. This allows the site to perform functions based on that data to display information to the user.
 
-Search:
+### Pokedex Filtering
 
-MasterDex allows site users to search pokemon by name throughout the site through the use of the searchbar.
+Masterdex's Pokedex feature allows users to filter Pokemon based on certain criteria such as typing and generation. This allows for ease of search for users to find what they are particularly interested in.
 
 ##Technologies Used
 The main goal of this project was to refine my knowledge on technologies I have used prior while also making a push to learn things I haven't before. This project uses the following...
