@@ -79,8 +79,4 @@ svg:hover {
     ul {
         flex-direction: row;
     }
-
-    section {
-        padding: 2rem 1rem;
-    }
 }

@@ -22,20 +22,20 @@
     padding: 1rem; /* 16px */
     border-radius: .5rem; /* 8px Corner Radius. */
     border: none;
-    cursor: pointer;
+
 }
 
 .dropdownButton:hover {
-    background-color: var(--call-to-action-color);
-    color: var(--default-button-color);
+    cursor: pointer;
+    background-color: gray;
 }
 
 .dropdownContent {
     flex-direction: column;
     position: absolute;
-    background-color: red;
     box-shadow: var(--box-shadow);
     min-width: 150px;
+    border-radius: 1rem;
     z-index: 1; /* Moves It Over Other Content */
 }
 

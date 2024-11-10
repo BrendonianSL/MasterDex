@@ -4,7 +4,7 @@
     width: 100%;
     flex-grow: 1; /* Takes Up Remaining Space In Container. */
     flex-direction: column;
-    padding: 1rem 0rem;
+    padding: 0rem 2rem;
     gap: 2rem;
 }
 
@@ -39,3 +39,16 @@
 
 }
 
+
+/* Tablet View */
+@media only screen and (min-width: 641px) and (max-width: 1024px) {
+    #grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 640px) {
+    #grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}

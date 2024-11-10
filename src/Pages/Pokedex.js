@@ -170,18 +170,18 @@ export function Pokedex() {
     }
 
     //Helper Function To Apply Type Filter To Pokemon Data.
-    function applyTypeFilter({ target }) {
+    function applyTypeFilter(type) {
         setFilters(prevFilters => ({
             ...prevFilters,
-            type: target.value,
+            type: type,
         }));
     }
 
     //Helper Function To Apply Generation Filter To The Pokemon.
-    function applyGenerationFilter({ target }) {
+    function applyGenerationFilter(generation) {
         setFilters(prevFilters => ({
             ...prevFilters,
-            generation: target.value,
+            generation: generation,
         }));
     }
     
@@ -198,7 +198,7 @@ export function Pokedex() {
         <main id={styles.pokedexContainer}>
             <h2>Pokedex</h2>
             <div id={styles.filterContainer}>
-                <DropdownButton />
+                <DropdownButton filterFunction={applyTypeFilter} />
             </div>
             <section id={styles.grid}>
                 {fetchLoad ? (
