@@ -4,6 +4,8 @@
     width: 100%;
     flex-grow: 1; /* Takes Up Remaining Space In Container. */
     flex-direction: column;
+    padding: 1rem 0rem;
+    gap: 2rem;
 }
 
 #grid {
@@ -12,3 +14,28 @@
     gap: 1rem;
     width: 100%;
 }
+
+#paginationContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.paginateButton {
+    background-color: #F05A57;
+    color: white;
+    padding: 1rem;
+    border-radius: 1rem;
+    border: none;
+    transition: color .2s linear;
+    transition: background-color .2s linear;
+}
+
+.paginateButton:hover {
+    cursor: pointer;
+    background-color: #FFF;
+    color: #F05A57;
+
+}
+

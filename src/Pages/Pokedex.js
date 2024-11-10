@@ -5,6 +5,8 @@ import { ErrorComponent } from '../components/ErrorComponent';
 import FetchData from '../services/FetchData';
 import { applicationData } from '../services/applicationDataSlice';
 import { PokemonCard } from '../components/PokemonCard';
+import { DropdownButton } from '../components/DropdownButton';
+import { SkeletonGrid } from '../components/SkeletonGrid';
 
 export function Pokedex() {
     const dispatch = useDispatch();
@@ -185,7 +187,7 @@ export function Pokedex() {
     
     // Conditional rendering based on loading and error state
     if (isLoading) {
-        return <div><p>Loading...</p></div>;
+        return <SkeletonGrid />;
     } 
 
     if (error) {
@@ -195,8 +197,9 @@ export function Pokedex() {
     return (
         <main id={styles.pokedexContainer}>
             <h2>Pokedex</h2>
-            <button onClick={previousPage} disabled={pageNumber === 1}>Previous</button>
-            <button onClick={nextPage} disabled={pageNumber === Object.keys(paginatedData).length}>Next</button>
+            <div id={styles.filterContainer}>
+                <DropdownButton />
+            </div>
             <section id={styles.grid}>
                 {fetchLoad ? (
                     <p>Loading...</p>
@@ -216,6 +219,11 @@ export function Pokedex() {
                     ))
                 )}
             </section>
+            <div id={styles.paginationContainer}>
+                <button className={styles.paginateButton} onClick={previousPage} disabled={pageNumber === 1}>Prev</button>
+                {`${pageNumber} of ${Object.keys(paginatedData).length}`}
+                <button className={styles.paginateButton} onClick={nextPage} disabled={pageNumber === Object.keys(paginatedData).length}>Next</button>
+            </div>
         </main>
     );
 }
